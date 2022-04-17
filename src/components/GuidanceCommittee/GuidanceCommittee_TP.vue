@@ -1,0 +1,55 @@
+<template>
+  <el-container>
+    <el-header style="height:40px" class="as_title">
+      培养方案{{this.tp_year}}-{{this.tp_major}} | 查看培养方案
+      <hr/>
+    </el-header>
+
+    <el-main style="background-color: white; border-radius: 5px;">
+      <!--初始化培养方案模块-->
+      <TrainingProgramInfo></TrainingProgramInfo>
+    </el-main>
+  </el-container>
+</template>
+
+<script>
+  import TrainingProgramInfo from "../Entity/TrainingProgram/TrainingProgramInfo.vue"
+    export default {
+        name: "GuidanceCommittee_TP",
+      data(){
+          return {
+            tp_id:'',
+            tp_year:'',
+            tp_major:''
+          }
+      },
+      components:{
+        TrainingProgramInfo
+      },
+      created() {
+          console.log("GET",this.$route.query)
+
+        // // console.log('get',tp1)
+        this.tp_id = this.$route.query.tp_id;
+        this.tp_year = this.$route.query.tp_year;
+        this.tp_major = this.$route.query.tp_major;
+
+        console.log(this.tp_id)
+      }
+    }
+</script>
+
+<style scoped>
+  .as_title{
+    /*height:40px;*/
+    text-align:left;
+    font-weight:bold;
+    font-size:16px;
+    font-family:'Microsoft YaHei Regular', 'Microsoft YaHei';
+  }
+  hr{
+    height: 1px;
+    background: black;
+    border:none;
+  }
+</style>
