@@ -18,7 +18,7 @@
 
     <el-main style="padding: 1px">
       <!--查看课程信息-->
-      <CourseList></CourseList>
+      <CourseList :training_program_id="training_program_id" :major="major" :year="year"></CourseList>
       <!--<CourseInfo></CourseInfo>-->
     </el-main>
   </el-container>
@@ -33,6 +33,19 @@
     components:{
       CourseList,
       // CourseInfo
+    },
+    data(){
+      return{
+        training_program_id:'',
+        major:'',
+        year:''
+      }
+    },
+    created(){
+      let that=this
+      that.training_program_id = that.$route.query.training_program_id;
+      that.major=that.$route.query.major
+        that.year=that.$route.query.year
     },
     methods:{
       clickevent (path) {

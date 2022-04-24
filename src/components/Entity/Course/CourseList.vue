@@ -10,7 +10,7 @@
         </i>
         <el-input v-model="input" placeholder="软件工程基础" class="top_content_input" style="font-size: 12px"></el-input>
       </div>
-      <el-button type="primary" class="button" size="small">设置班级信息</el-button>
+      <!--<el-button type="primary" class="button" size="small">设置班级信息</el-button>-->
     </div>
 
 
@@ -70,6 +70,7 @@
   import CourseInfo from '../../Entity/Course/CourseInfo'
   export default {
     name: "CourseList",
+    props:['training_program_id','major','year'],
     components:{
       CourseInfo
     },
@@ -88,10 +89,10 @@
     created() {
       console.log("create func")
       let that = this;
-      axios.get("/data_query/course_list", {
+      axios.get("/data_query/course_list_by_training_program_id", {
         params: {
-          user_id: 'PKU10085-IT202022123456',
-          user_identity: 'IT'
+            major:that.major,
+          year:that.year
         }
       }).then(function (response) {
           console.log(response)
@@ -118,8 +119,8 @@
 
         axios.get("/data_query/course_list", {
           params: {
-            user_id: 'PKU10085-SE080902-ST202011223344',
-            user_identity: 'ST'
+            user_id: that.$store.state.user_id,
+            user_identity: that.$store.state.identity
           }
         })
         // axios({
@@ -132,7 +133,7 @@
         // })
           .then(function (response) {
               console.log(response)
-              if ((response.data.code == '000000') && (response.data.msg == 'success')) {
+              if (response.data.code == '000000') {
                 //alert('上传成功')
                 console.log(response)
               } else {

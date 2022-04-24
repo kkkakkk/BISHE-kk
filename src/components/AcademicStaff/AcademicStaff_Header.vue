@@ -92,7 +92,7 @@
           </el-menu-item>
           <el-menu-item index="3-6"
                         @click="clickTab('/AcademicStaff/StudentInfoInit')">
-            <span slot="title">学生信息设置</span>
+            <span slot="title" style="width: 100%">学生信息设置</span>
           </el-menu-item>
 
         </el-submenu>

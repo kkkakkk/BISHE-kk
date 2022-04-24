@@ -16,6 +16,11 @@
     export default {
         name: "ShowCourseInfo",
       components: {CourseInfo},
+      created(){
+        this.currentRow.course_id=this.$route.query.course_id;
+        this.currentRow.course_name=this.$route.query.course_name;
+      },
+
       data(){
           return{
             currentRow:{course_id: 'defualt',course_name:'default_coursename'},

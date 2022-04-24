@@ -54,7 +54,7 @@
                   size="mini"
                   type="text"
                   class="view_btn"
-                  @click="viewDetail(scope.row.training_objective_id, '/AcademicStaff/TrainingProgram/TrainingProgramDetail')">查看</el-button>
+                  @click="viewDetail(scope.row.training_objective_id, scope.row.training_objective_major,scope.row.training_objective_year,'/AcademicStaff/TrainingProgram/TrainingProgramDetail')">查看</el-button>
               </template>
             </el-table-column>
 
@@ -64,7 +64,7 @@
                   size="mini"
                   type="text"
                   class="view_btn"
-                  @click="viewDetail(scope.row.training_objective_id, '/AcademicStaff/TrainingProgram/TeachingDetail')">查看</el-button>
+                  @click="viewDetail(scope.row.training_objective_id,scope.row.training_objective_major,scope.row.training_objective_year, '/AcademicStaff/TrainingProgram/TeachingDetail')">查看</el-button>
               </template>
             </el-table-column>
 
@@ -100,12 +100,14 @@
               path: path
             })
           },
-          viewDetail(id,path){
-            console.log(id);
+          viewDetail(id,major,year,path){
+            console.log("查看detail",id,'专业',major,year,path);
             this.$router.push({
               path: path,
               query: {
-                training_program_id: id
+                training_program_id: id,
+                major:major,
+                year:year,
               }
             })
           },
@@ -117,8 +119,8 @@
         let that = this;
         axios.get("/data_query/academic_staff_training_program",{
           params:{
-            user_id: 'PKU10085-TA202011187766',
-            user_identity: 'TA'
+            user_id: that.$store.state.user_id,
+            user_identity: that.$store.state.identity
             // assess_id: "proident in",
             // stu_id: "non esse veniam reprehenderit"
           }

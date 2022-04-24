@@ -6,7 +6,7 @@
       </el-header>
 
       <el-main class="main_content">
-        <CourseManagerTab  :course_name="course_name" :course_id="course_id" :semester="semester"></CourseManagerTab>
+        <StudentCourseManagerTab  :course_name="course_name" :course_id="course_id" :semester="semester"></StudentCourseManagerTab>
 
       </el-main>
 
@@ -16,11 +16,11 @@
 </template>
 
 <script>
-  import CourseManagerTab from "../Teacher/CourseManagerTab"
+  import StudentCourseManagerTab from './StudentCourseManagerTab'
     export default {
-      name: "CourseManager",
+        name: "StudentCourseManager",
       components:{
-        CourseManagerTab,
+        StudentCourseManagerTab,
       },
       data(){
         return {
@@ -81,4 +81,3 @@
   }
 
 </style>
-

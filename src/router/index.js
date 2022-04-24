@@ -17,16 +17,20 @@ import AcademicStaffEndCourse from '../components/AcademicStaff/AcademicStaffEnd
 import AcademicStaffHistoryTP from '../components/AcademicStaff/AcademicStaffHistoryTP'
 import JobRecommendation from '../components/AcademicStaff/JobRecommendation'
 
+import Teacher_CourseList from '../components/Teacher/TeacherCourseList'
+
+import StudentCourseList from '../components/Student/StudentCourseList'
+import StudentCourseManager from '../components/Student/StudentCourseManager'
 //ZKT Add
 import FatherStep_1 from '../components/AcademicStaff/TrainingProgram/InitialTPstepComponents/Part_1/FatherStep_1'
 import FatherStep_2 from '../components/AcademicStaff/TrainingProgram/InitialTPstepComponents/Part_2/FatherStep_2'
 import FatherStep_3 from '../components/AcademicStaff/TrainingProgram/InitialTPstepComponents/Part_3/FatherStep_3'
 
-import Teacher from "../components/Home/Role/Teacher";
+import Teacher from "../components/Teacher/Teacher";
 import CourseManager from '../components/Teacher/CourseManager'
 import Redirect from '../components/Teacher/Redirect'
 
-import Student from '../components/Home/Role/Student'
+import Student from '../components/Student/Student'
 import AssessmentManager from '../components/Student/AssessmentManager'
 import AssessInfo_Student from '../components/Student/AssessInfo_Student'
 import CourseInitial from '../components/Teacher/CourseInitial'
@@ -176,11 +180,23 @@ export default new Router({
       path:'/Teacher',
       name:'Teacher',
       component:Teacher,
-      children:[{
+      children:[
+        {
+          path: '/',
+          name: Teacher,
+          redirect: '/Teacher/CourseList'
+        },
+        {
+          path: '/Teacher/CourseList',
+          name: 'Teacher_CourseList',
+          component: Teacher_CourseList
+        },
+        {
         path: '/redirect',
         name: 'Redirect',
         component: Redirect
-      }, {
+      },
+        {
         path: '/Teacher/CourseManager',
         name: 'CourseManager',
         component: CourseManager,
@@ -210,7 +226,23 @@ export default new Router({
       path:'/Student',
       name:'Student',
       component:Student,
-      children:[{
+      children:[
+        {
+          path: '/',
+          name: Student,
+          redirect: '/Student/CourseList'
+        },
+        {
+          path: '/Student/CourseList',
+          name: 'StudentCourseList',
+          component: StudentCourseList
+        },
+        {
+          path: '/Student/CourseManager',
+          name: 'StudentCourseManager',
+          component: StudentCourseManager
+        },
+        {
         path: '/student/redirect',
         name: 'Redirect',
         component: Redirect
@@ -308,7 +340,6 @@ export default new Router({
         }
         ]
     },
-
     {
       path: '/CourseEvaluateStaff',
       name: 'CourseEvaluateStaff',

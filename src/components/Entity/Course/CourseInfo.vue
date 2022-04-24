@@ -9,6 +9,7 @@
         <el-button type="primary" size="small" class="button" style="float: left;">课程目标</el-button>
         <div style="flex:1;border-bottom:1px solid rgb(59, 105, 152)"></div>
       </div>
+
       <p align="left" style="margin-top:10px;padding-left:10px"
         v-for="(course_obj) in courseinfo.course_objective_list">
         {{course_obj.course_objective_no}}-{{course_obj.course_objective_content}}<br></p>
@@ -91,14 +92,10 @@
 
       </el-table>
 
-
-
-
-
     </div>
 
 
-    <div class="self-assessment-box">
+    <div class="self-assessment-box" v-show="!student_identity_flag">
       <h6 class="title" style="text-align:left">{{this.course_obj.course_name}} | 课程评议意见</h6>
       <div class="self-box-item">
         <div class="info-item-inline">
@@ -186,6 +183,7 @@
     },
     data() {
         return {
+          student_identity_flag:false,
 
 
           table_column_ability_courseobj:[],
@@ -240,6 +238,10 @@
     created(){
       let that=this;
       that.get_allcourseinfo(that.course_obj.course_id)
+
+      if(that.$store.state.identity=="ST"){
+        that.student_identity_flag=true
+      }
     },
     methods:{
       get_allcourseinfo(courseid){

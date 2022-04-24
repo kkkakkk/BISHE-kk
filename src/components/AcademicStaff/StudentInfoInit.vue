@@ -140,12 +140,8 @@ export default {
   created(){
     let that=this;
     axios.get("/data_init/history_training_program_list",{
-
       params:{
-
-        school_no:'10085'
-        // assess_id: "proident in",
-        // stu_id: "non esse veniam reprehenderit"
+        school_no:that.$store.state.identity
       }
     }).then(function(response){
         // console.log("专业列表",response.data);

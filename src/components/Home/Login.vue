@@ -98,10 +98,12 @@ export default {
       this.$refs.loginFormRef.validate(valid => {
         if (valid) {
           let that = this;
+          var school_no='10085';
           axios.post("/auth/login",{
             params:{
               username: that.loginForm.username,
               password: that.loginForm.password,
+              school_no:school_no,
               // identity: this.loginForm.identity,
             }
           }).then(function (response){
@@ -109,25 +111,52 @@ export default {
               if((response.data.code=='000000')){
                 var path='/AcademicStaff'
                 let identity=that.loginForm.identity;
+                var identity_type=''
                 if(identity=='教务员'){
                   path='/AcademicStaff';
+                  identity_type='TA';
                 }else if(identity=='学生'){
                   path='/Student';
+                  identity_type='ST';
                 }else if(identity=='教师'){
                   path='/Teacher';
+                  identity_type='IT';
                 }else if(identity=='课程评价组'){
                   path='/CourseEvaluateStaff';
+                  identity_type='TG';
                 }else if(identity=='教学主管'){
                   path='/ASManager';
+                  identity_type='TM';
                 }else if(identity=='评阅小组'){
                   path='/TeachingEvaluateStaff';
+                  identity_type='RE';
                 }else if(identity=='教学指导委员会'){
                   path='/GuidanceCommittee';
+                  identity_type='TS';
                 } else{
                   alert('身份错误')
                 }
-                console.log(that.loginForm.identity)
-                console.log(path)
+
+
+                // var user_id=response.data.data.user_id;
+                // var user_no=response.data.data.user_no;
+                // var user_name=response.data.data.user_name;
+                // var major=response.data.data.major;
+                // var school_name=response.data.data.school_name;
+
+
+                var user_no=that.loginForm.username;
+                var user_id=school_no+'-'+identity_type+user_no+"我的id";
+                var user_name=user_no+'名字';
+                var major=user_no+'专业';
+                var school_name=school_no+"名字";
+
+                var logininfo={'user_no':user_no,'user_id':user_id,'user_name':user_name,'identity':identity_type,
+                'school_name':school_name,'school_no':school_no,'major':major}
+
+                that.$store.commit('setLoginInfo',logininfo);
+
+
                 that.$router.replace({path: path})
               }
               else{alert('登录部分code或msg错误')}
@@ -218,16 +247,17 @@ export default {
 }
 /*标题*/
 .aside_title {
-  margin: auto auto auto 110px;
+
+  margin: auto auto auto 15%;
   color: #000000;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 /*白色登录框4*/
 .login-container {
   border-radius: 15px;
   background-clip: padding-box;
-  margin: 70px 20px 65px auto;
+  margin: 70px 10% 65px auto;
   width: 330px;
   padding: 15px 120px 5px 120px;
   background: #e6ecf1;

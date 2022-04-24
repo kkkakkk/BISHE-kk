@@ -1,42 +1,46 @@
 <template>
   <div>
-  <el-container class="base">
-    <el-aside width="13%">
-      <Profile></Profile>
-      <div class="aside_left_margin">
-        <Teacher_Header ></Teacher_Header>
-      </div>
-    </el-aside>
+    <el-container class="base">
+      <el-aside  width="100px">
+        <Profile></Profile>
+        <div class="aside_left_margin">
+          <Student_Header></Student_Header>
+        </div>
+      </el-aside>
 
-    <el-container class="aside_right">
+      <el-container class="aside_right">
 
-      <el-header class="obe_title">
-        <ObeTitle></ObeTitle>
-      </el-header>
+        <el-header class="obe_title">
+          <ObeTitle></ObeTitle>
+        </el-header>
 
-      <el-container class="aside_main">
-        <!--注入不同内容块-->
-        <router-view/>
+        <el-container class="aside_main">
+          <!--注入不同内容块-->
+          <router-view/>
+        </el-container>
+
       </el-container>
-
     </el-container>
-  </el-container>
 
-</div>
+  </div>
 </template>
 
 <script>
-    import Profile from "../Profile"
-    import ObeTitle from '../ObeTitle'
-    import Teacher_Header from '../../Teacher/Teacher_Header'
-    export default {
-        name: "Teacher",
-        components:{
-          Profile,
-          ObeTitle,
-          Teacher_Header
-        }
+
+  import Profile from "../Home/Profile"
+  import ObeTitle from '../Home/ObeTitle'
+  import Student_Header from './Student_Header'
+
+
+  export default {
+    name: "Student",
+    components:{
+      Profile,
+      ObeTitle,
+      Student_Header
+
     }
+  }
 </script>
 
 <style scoped>
@@ -54,8 +58,8 @@
 
   .aside_left_margin{
     margin-top:10px;
-    margin-left:10px;
-    margin-right:10px;
+    margin-left:5px;
+    margin-right:5px;
     margin-bottom:10px;
   }
   .obe_title{
@@ -79,10 +83,10 @@
   }
   .aside_main{
     border-radius: 2px;
-    background-color:rgba(139, 165, 192, 83);
-    margin-left:10px;
-    margin-right:10px;
-    margin-bottom: 10px;
+    background-color: rgba(246, 250, 255, 0.43);
+    margin-left:0px;
+    margin-right:0px;
+    margin-bottom: 0px;
     padding: 15px 10px 10px 10px;
     /*display:flex;*/
     /*flex-direction: row;*/

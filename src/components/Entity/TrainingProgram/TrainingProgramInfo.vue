@@ -2,7 +2,7 @@
   <div>
     <div class="grid-content bg">
       <div style="display:flex">
-        <el-button type="primary" class="button" size="small" style="float: left;">培养目标</el-button>
+        <el-button type="primary" class="button" size="small" style="float: left; cursor: default">培养目标</el-button>
         <div style="flex:1;border-bottom:1px solid rgb(59,105,152);margin-left:10px"></div>
       </div>
 <!--      <div>{{trainingProgramData}}</div>-->
@@ -14,23 +14,23 @@
     </div>
     <div  style="display:flex;margin-top:10px">
       <div class="grid-content grid-content-left bg" style="width:700px">
-        <el-button type="primary" class="button" size="small" style="float: left;">毕业要求与毕业要求分指标</el-button>
+        <el-button type="primary" class="button" size="small" style="float: left; cursor: default">毕业要求与毕业要求分指标</el-button>
         <br>
         <br>
         <p align="left" style="font-weight: bold" v-for = "(item,index) in trainingProgramData.graduation_requirement_list">{{index + 1}}.{{item.graduation_requirement_name}}:{{item.graduation_requirement_content}}
           <br>
-          <span align="left" v-for = "(i,idx) in item.graduation_subrequirement_list" style="font-weight: normal">{{index + 1}}-{{i.graduation_subrequirement_no}}:{{i.graduation_subrequirement_content}}<br></span>
+          <span align="left" v-for = "(i,idx) in item.graduation_subrequirement_list" :key="idx" style="font-weight: normal">{{index + 1}}-{{i.graduation_subrequirement_no}}:{{i.graduation_subrequirement_content}}<br></span>
         </p>
       </div>
       <div class="grid-content-right" style="flex:1">
         <div style="padding-bottom:10px;text-align:center;color:#fff;font-size:12px;font-weight:700">毕业要求分指标对培养目标的支撑关系</div>
         <el-table :data="graduation_requirement_support_training_subobjective_table" class="stand1" border style="width: 100%">
-          <el-table-column label="培养目标与毕业要求分指标" width="100px"  align="center">
+          <el-table-column label="培养目标与毕业要求分指标"  min-width="20%" align="center">
             <template slot-scope="scope"  >
               <p >{{scope.row['培养目标与毕业要求分指标']}}</p>
             </template>
           </el-table-column>
-          <el-table-column v-for="(item, index) in graduation_requirement_support_training_subobjective_table_header.slice(1)" :label="item" width="70px"  align="center">
+          <el-table-column v-for="(item, index) in graduation_requirement_support_training_subobjective_table_header.slice(1)" :key="index" :label="item"  align="center" min-width="5%">
             <template slot-scope="scope"  >
               <p >{{scope.row[item]}}</p>
             </template>
@@ -74,7 +74,7 @@
     </div>
     <div class="grid-content bg" style="margin-top:10px;border:2px solid rgb(59,105,152);border-radius:10px">
       <div style="display:flex;">
-        <el-button type="primary" class="button" size="small" style="float: left;">课程对毕业要求分指标的支撑</el-button>
+        <el-button type="primary" class="button" size="small" style="float: left;cursor: default">课程对毕业要求分指标的支撑</el-button>
         <div style="flex:1;border-bottom:1px solid rgb(59,105,152);margin-left:10px" />
       </div>
 
@@ -109,10 +109,10 @@
               </div>
             </div>
           </div>
-          <el-row  v-for = "(i,idx) in item.graduation_subrequirement_achievement" :gutter="20" type="flex" class="row-bg" justify="space-around">
+          <el-row  v-for = "(i,idx) in item.graduation_subrequirement_achievement" :key="idx" :gutter="20" type="flex" class="row-bg" justify="space-around">
             <el-col :span="20">
               <div class="grid-content-medium bg" style="height: 54px">
-                <p align="left">分指标{{i.graduation_subrequirement_no}}</p>
+                <p align="left">分指标{{i.graduation_subrequirement_no}}：{{i.graduation_subrequirement_content}}</p>
               </div>
             </el-col>
             <el-col :span="4">
@@ -192,57 +192,6 @@
         graduation_requirement_support_training_subobjective_table:[],
         graduation_subrequirement_name_list:[],
         course_objective_content:'',
-        tableData1: [{
-          target: '毕业要求1（工程知识）',
-          subTarget1: '√',
-          subTarget2: '',
-          subTarget3: '',
-          subTarget4: ''
-        }, {
-          target: '毕业要求2（问题分析）',
-          subTarget1: '√',
-          subTarget2: '',
-          subTarget3: '',
-          subTarget4: ''
-        },
-          {
-            target: '毕业要求3（设计/开发解决方案）',
-            subTarget1: '√',
-            subTarget2: '',
-            subTarget3: '',
-            subTarget4: '√'
-          },
-          {
-            target: '毕业要求4（研究）',
-            subTarget1: '√',
-            subTarget2: '',
-            subTarget3: '',
-            subTarget4: '√'
-          },
-          {
-            target: '毕业要求5（使用现代工具）',
-            subTarget1: '√',
-            subTarget2: '',
-            subTarget3: '',
-            subTarget4: '√'
-          },
-          {
-            target: '毕业要求6（工程与社会）',
-            subTarget1: '√',
-            subTarget2: '',
-            subTarget3: '',
-            subTarget4: '√'
-          },
-        ],
-        tableData3: [{
-          subTarget: '01',
-          strongSupportCourse1: '高等数学（0.25）',
-          strongSupportCourse2: '大学物理（0.2）',
-          strongSupportCourse3: '大学物理实验（0.1）',
-          strongSupportCourse4: '概率统计（0.2）',
-          strongSupportCourse5: '线性代数B（0.25）',
-          strongSupportCourse6: ''
-        }]
       }
 
     },
@@ -272,7 +221,7 @@
               tmpdict['子目标'+tmpno] = '√'
             }
           }
-          console.log(tmpdict)
+          //console.log(tmpdict)
           this.graduation_requirement_support_training_subobjective_table.push(tmpdict)
         }
 
@@ -314,7 +263,7 @@
           }
         }).then(function (response){
             console.log(response.data);
-            if((response.data.code=='000000')&&(response.data.msg=='成功')){
+            if((response.data.code=='000000')){
               that.trainingProgramData = response.data.data;
               that.totalCurriculumPage = that.trainingProgramData.curriculum_list.length
               console.log('that.totalCurriculumPage'+that.totalCurriculumPage)
